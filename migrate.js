@@ -10,6 +10,9 @@ const SEND_PKP_TO_ITSELF = true;
 // use a private key key that has some Lit tokens in it for gas.  You can use any wallet here, it just needs to have tokens on Chronicle.
 const WALLET_PRIVATE_KEY = process.env.LIT_ROLLUP_MAINNET_DEPLOYER_PRIVATE_KEY;
 
+// set this to the new network you want to mint the PKPs on.  You can choose either "manzano" or "habanero".
+const NEW_NETWORK = "manzano";
+
 const go = async () => {
     // start with your list of PKPs that you want to migrate.  This should come from your user list, which should be in a database somewhere. 
     const pkps = [
@@ -23,7 +26,7 @@ const go = async () => {
     console.log(`We got data for ${Object.keys(pkpsWithData).length} PKPs`);
 
     // mint new PKPs with matching auth methods and scopes
-    const newPkps = await mintPkpsWithAuthMethods(pkpsWithData, 'manzano', WALLET_PRIVATE_KEY, ADD_PKP_ETH_ADDRESS_AS_PERMITTED_ADDRESS, SEND_PKP_TO_ITSELF);
+    const newPkps = await mintPkpsWithAuthMethods(pkpsWithData, NEW_NETWORK, WALLET_PRIVATE_KEY, ADD_PKP_ETH_ADDRESS_AS_PERMITTED_ADDRESS, SEND_PKP_TO_ITSELF);
     console.log(`We minted ${Object.keys(newPkps).length} new PKPs`);
 
     // save this list of new PKPs.  You must now migrate (or have your users migrate) their assets and authorizations to these new PKPs.
