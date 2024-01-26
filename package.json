@@ -1,0 +1,15 @@
+{
+  "name": "PKP-Migrate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "migrate": "node migrate.js"
+  },
+  "dependencies": {
+    "@lit-protocol/contracts-sdk": "../js-sdk/dist/packages/contracts-sdk",
+    "@lit-protocol/lit-auth-client": "../js-sdk/dist/packages/lit-auth-client",
+    "ethers": "^5.7.2"
+  },
+  "type": "module"
+}
