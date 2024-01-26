@@ -14,9 +14,9 @@ This repo provides an example of how to re-mint PKPs from Cayenne to Habanero.  
 
 # How to use
 
-Run `yarn`` to install all the packages.
+Run `yarn` to install all the packages.
 
-Open `migrate.js`` and set the CONST variables at the top according to your use case.  
+Open `migrate.js` and set the CONST variables at the top according to your use case.  
 
 You can then use "yarn migrate" to run the migration.  The results will be saved in `newPkps.json`.  Each entry in the `newPkps.json` object is indexed by the old PKP public key and will look like the below:
 
