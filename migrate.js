@@ -1,6 +1,15 @@
 import { mintPkpsWithAuthMethods, getDataForPkps } from './utils.js'
 import fs from 'fs';
 
+// You may change this depending on your use case.  This will add the PKP's eth address as a permitted address for that PKP.  You may or may not want to do this.  I would refer to your original implementation of how you currently mint PKPs for your user and if this is turned on or not.
+const ADD_PKP_ETH_ADDRESS_AS_PERMITTED_ADDRESS = true;
+
+// You may change this depending on your use case.  This will send the new PKP to itself.  You may or may not want to do this.  I would refer to your original implementation of how you currently mint PKPs for your user and if this is turned on or not.  If you do not turn this on, then the new PKP will be sent to the deployer address.
+const SEND_PKP_TO_ITSELF = true;
+
+// use a private key key that has some Lit tokens in it for gas.  You can use any wallet here, it just needs to have tokens on Chronicle.
+const WALLET_PRIVATE_KEY = process.env.LIT_ROLLUP_MAINNET_DEPLOYER_PRIVATE_KEY;
+
 const go = async () => {
     // start with your list of PKPs that you want to migrate.  This should come from your user list, which should be in a database somewhere. 
     const pkps = [
@@ -10,11 +19,11 @@ const go = async () => {
     ]
 
     // get all the old PKP data including the auth methods and their scopes
-    const pkpsWithData = await getDataForPkps(pkps);
+    const pkpsWithData = await getDataForPkps(pkps, WALLET_PRIVATE_KEY);
     console.log(`We got data for ${Object.keys(pkpsWithData).length} PKPs`);
 
     // mint new PKPs with matching auth methods and scopes
-    const newPkps = await mintPkpsWithAuthMethods(pkpsWithData, 'manzano');
+    const newPkps = await mintPkpsWithAuthMethods(pkpsWithData, 'manzano', WALLET_PRIVATE_KEY, ADD_PKP_ETH_ADDRESS_AS_PERMITTED_ADDRESS, SEND_PKP_TO_ITSELF);
     console.log(`We minted ${Object.keys(newPkps).length} new PKPs`);
 
     // save this list of new PKPs.  You must now migrate (or have your users migrate) their assets and authorizations to these new PKPs.
