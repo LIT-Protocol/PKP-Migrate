@@ -7,8 +7,8 @@
     "migrate": "node migrate.js"
   },
   "dependencies": {
-    "@lit-protocol/contracts-sdk": "../js-sdk/dist/packages/contracts-sdk",
-    "@lit-protocol/lit-auth-client": "../js-sdk/dist/packages/lit-auth-client",
+    "@lit-protocol/contracts-sdk": "^3.1.1",
+    "@lit-protocol/lit-auth-client": "^3.1.1",
     "ethers": "^5.7.2"
   },
   "type": "module"
